@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +19,29 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+#region  Cookies AUTH
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.HttpOnly = true; // Previene acceso via JS
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Solo HTTPS
+        options.Cookie.SameSite = SameSiteMode.Strict; // Anti-CSRF
+        options.SlidingExpiration = true; // Renueva la cookie si el usuario está activo
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Sesión expira en 30 min
+        options.LoginPath = "/login"; // Ruta personalizada de login
+    });
+
+// Agrega estos servicios al contenedor de dependencias
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<AuthService>();
+#endregion
+
 #region JWT Config & Cookies
+/*
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = jwtSettings["Key"];
 
-/*
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -59,7 +78,7 @@ builder.Services.AddDbContext<DBContext>(options =>
 #endregion
 
 #region  DependencyInjection
-builder.Services.AddHttpClient();
+
 
 builder.Services.AddScoped<IRepository<Account>, AccountRepository>();
 builder.Services.AddScoped<IRepository<Employee>, EmployeeRepository>();
@@ -73,6 +92,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWorkRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IUserDomainService, UserDomainService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ICookieService, CookieService>();
 
 
 builder.Services.AddControllers();
