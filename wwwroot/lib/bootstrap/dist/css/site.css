@@ -1,0 +1,22 @@
+/* Estilo para el fondo de la página de login */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Estilo para la tarjeta de login */
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+/* Estilo para el botón de login */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
