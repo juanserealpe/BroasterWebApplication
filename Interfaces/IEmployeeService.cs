@@ -10,6 +10,5 @@ namespace BroasterWebApp.interfaces
         Task<Employee> GetEmployeeByIdAsync(int prmId);
         Task<Employee> GetEmployeeByUsernameAsync(string prmUsername);
         Task<IEnumerable<Employee>> GetAllAsync();
-
     }
 }

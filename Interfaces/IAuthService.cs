@@ -7,5 +7,6 @@ namespace BroasterWebApp.interfaces
     {
         Task AddAccountAsync(Account prmAccount);
         Task<Employee> IsLoginValidAsync(string prmUsername, string prmPassword);
+        Task<Account> GetAccountAsyncByUsername(string prmUsername);
     }
 }

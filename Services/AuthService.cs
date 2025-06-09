@@ -16,15 +16,18 @@ namespace BroasterWebApp.services
 
         public async Task AddAccountAsync(Account prmAccount)
         {
-            prmAccount.PasswordHash.Trim();
+            prmAccount.PasswordHash = prmAccount.PasswordHash.Trim();
             prmAccount.PasswordHash = BCrypt.Net.BCrypt.HashPassword(prmAccount.PasswordHash);
             await _accountRepository.AddAsync(prmAccount);
         }
 
         public async Task<Employee> IsLoginValidAsync(string prmUsername, string prmPassword)
         {
-            var accountResult = await _accountRepository.GetByStringAsync(prmUsername);
-            if (accountResult == null) return null;
+            if (string.IsNullOrWhiteSpace(prmUsername))
+                return null;
+
+            var accountResult = await _accountRepository.GetByStringAsync(prmUsername.Trim());
+
             string storedHash = accountResult.PasswordHash.Trim();
             string passwordToVerify = prmPassword.Trim();
             if (!BCrypt.Net.BCrypt.Verify(prmPassword, storedHash))
@@ -34,6 +37,11 @@ namespace BroasterWebApp.services
                 return null;
             }
             return await _employeeRepository.GetByIdAsync(accountResult.IdEmployee);
+        }
+        
+        public async Task<Account> GetAccountAsyncByUsername(string prmUsername)
+        {
+            return await _accountRepository.GetByStringAsync(prmUsername);
         }
     }
 }

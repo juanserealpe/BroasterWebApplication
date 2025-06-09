@@ -25,10 +25,15 @@ namespace BroasterWebApp.Entities
         [MaxLength(255)]
         [Column("passwordhash")]
         public string PasswordHash { get; set; }
-
+        [Column("last_password_update")]
         public DateTime? LastPasswordUpdate { get; set; }
 
-        [ForeignKey("IdEmployee")] // Referencia a la propiedad, no a la columna
+        [ForeignKey("IdEmployee")] 
         public Employee Employee { get; set; }
+
+        public Account()
+        {
+            
+        }
     }
 }

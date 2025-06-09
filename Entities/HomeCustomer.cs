@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Sockets;
 
 namespace BroasterWebApp.Entities{
@@ -8,6 +9,7 @@ public class HomeCustomer
 {
         [Key]
         [MaxLength(20)]
+        [Column("main_phone_number")]
         public string MainPhoneNumber { get; set; }
 
         [MaxLength(20)]

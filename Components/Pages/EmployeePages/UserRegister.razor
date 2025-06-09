@@ -1,0 +1,77 @@
+@page "/register"
+@rendermode InteractiveServer
+@inject IUserDomainService _userService
+@using System.ComponentModel.DataAnnotations
+@using BroasterWebApp.DTOs
+@using BroasterWebApp.Entities
+@using BroasterWebApp.interfaces
+@using Microsoft.AspNetCore.Authorization
+@inject NavigationManager Navigation
+
+
+<h3>Registro de Empleados</h3>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+<EditForm Model="@userDomain" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>First Name:</label>
+        <InputText @bind-Value="userDomain.employee.FirstName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Last Name:</label>
+        <InputText @bind-Value="userDomain.employee.LastName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Role ID:</label>
+        <InputNumber @bind-Value="userDomain.employee.IdRole" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Employee ID:</label>
+        <InputNumber @bind-Value="userDomain.employee.IdEmployee" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Username</label>
+        <InputText @bind-Value="userDomain.account.Username" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <InputText @bind-Value="userDomain.account.PasswordHash" class="form-control" />
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</EditForm>
+
+@code {
+    private UserDomainDTO userDomain = new UserDomainDTO();
+    private string errorMessage = string.Empty;
+
+    private async Task HandleValidSubmit()
+    {
+        errorMessage = string.Empty;
+
+        try
+        {
+            await _userService.AddEmployee(userDomain.employee, userDomain.account);
+            Navigation.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.Message;
+        }
+    }
+
+}

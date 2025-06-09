@@ -18,6 +18,5 @@ namespace BroasterWebApp.Entities
         [ForeignKey("IdRoleType")]
         public RoleType RoleType { get; set; }
 
-        public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
     }
 }

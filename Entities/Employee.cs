@@ -10,30 +10,24 @@ namespace BroasterWebApp.Entities
         [Key]
         [Column("id_employee")]
         public int IdEmployee { get; set; }
-
         [Required]
-        [MaxLength(50)]
         [Column("first_name")]
         public string FirstName { get; set; }
-
         [Required]
-        [MaxLength(50)]
         [Column("last_name")]
         public string LastName { get; set; }
 
-        [MaxLength(100)]
-        [Column("email")]
-        public string Email { get; set; }
-        [Column("hire_date")]
-        public DateTime? HireDate { get; set; }
-
-        [Required]
+        [Range(1, 3, ErrorMessage = "Rol inválido")]
         [Column("id_role")]
         public int IdRole { get; set; }
 
-        [ForeignKey("IdRole")]
         public Role Role { get; set; }
 
-        public virtual Account Account { get; set; }
+        public Account Account { get; set; }
+
+        public Employee()
+        {
+            
+        }
     }
 }

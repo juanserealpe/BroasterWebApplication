@@ -18,7 +18,6 @@ namespace BroasterWebApp.repositories
         public async Task AddAsync(Employee prmItem)
         {
             await _dbContext.AddAsync(prmItem);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int prmId)
@@ -42,11 +41,14 @@ namespace BroasterWebApp.repositories
             return await _dbContext.Set<Employee>().ToListAsync();
         }
 
-        public async Task<Employee> GetByIdAsync(int prmId)
+        public async Task<Employee> GetByIdAsync(int id)
         {
-            return await _dbContext.Set<Employee>()
-                .FirstOrDefaultAsync(a => a.IdEmployee == prmId);
+            return await _dbContext.Employees
+                .Include(e => e.Role)
+                    .ThenInclude(r => r.RoleType)
+                .FirstOrDefaultAsync(e => e.IdEmployee == id);
         }
+
 
         public Task<Employee> GetByStringAsync(string prmString)
         {

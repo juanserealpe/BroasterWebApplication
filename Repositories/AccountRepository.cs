@@ -18,7 +18,6 @@ namespace BroasterWebApp.repositories
         public async Task AddAsync(Account prmItem)
         {
             await _dbContext.AddAsync(prmItem);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int prmId)
@@ -44,8 +43,9 @@ namespace BroasterWebApp.repositories
 
         public async Task<Account> GetByIdAsync(int prmId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<Account>().FindAsync(prmId);
         }
+
 
         public async Task<Account> GetByStringAsync(string prmString)
         {
