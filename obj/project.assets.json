@@ -5109,11 +5109,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/linux/Desktop/BroasterWeb/BroasterWeb/BroasterWebApp.csproj",
+      "projectUniqueName": "/home/linux/Desktop/BroasterWebApplication/BroasterWebApp.csproj",
       "projectName": "BroasterWebApp",
-      "projectPath": "/home/linux/Desktop/BroasterWeb/BroasterWeb/BroasterWebApp.csproj",
+      "projectPath": "/home/linux/Desktop/BroasterWebApplication/BroasterWebApp.csproj",
       "packagesPath": "/home/linux/.nuget/packages/",
-      "outputPath": "/home/linux/Desktop/BroasterWeb/BroasterWeb/obj/",
+      "outputPath": "/home/linux/Desktop/BroasterWebApplication/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/linux/.nuget/NuGet/NuGet.Config"

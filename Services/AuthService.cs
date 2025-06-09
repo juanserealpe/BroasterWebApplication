@@ -23,11 +23,8 @@ namespace BroasterWebApp.services
 
         public async Task<Employee> IsLoginValidAsync(string prmUsername, string prmPassword)
         {
-            if (string.IsNullOrWhiteSpace(prmUsername))
-                return null;
-
+            if (string.IsNullOrWhiteSpace(prmUsername)) return null;
             var accountResult = await _accountRepository.GetByStringAsync(prmUsername.Trim());
-
             string storedHash = accountResult.PasswordHash.Trim();
             string passwordToVerify = prmPassword.Trim();
             if (!BCrypt.Net.BCrypt.Verify(prmPassword, storedHash))
@@ -38,7 +35,7 @@ namespace BroasterWebApp.services
             }
             return await _employeeRepository.GetByIdAsync(accountResult.IdEmployee);
         }
-        
+
         public async Task<Account> GetAccountAsyncByUsername(string prmUsername)
         {
             return await _accountRepository.GetByStringAsync(prmUsername);

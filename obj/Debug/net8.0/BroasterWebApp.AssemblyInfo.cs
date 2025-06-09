@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BroasterWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32d38dd914d0e71b179450ae44f91d1fbba422aa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78a3094b047f204ab3fdc3dda9dc49903ad62776")]
 [assembly: System.Reflection.AssemblyProductAttribute("BroasterWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BroasterWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
