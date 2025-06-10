@@ -6,7 +6,11 @@
 @using BroasterWebApp.Entities
 @using BroasterWebApp.interfaces
 @using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+
+@attribute [Authorize(Roles = "Administrator")]
 @inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 
 <h3>Registro de Empleados</h3>
@@ -73,5 +77,4 @@
             errorMessage = e.Message;
         }
     }
-
 }
